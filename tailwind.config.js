@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       transitionProperty: {
         bottom: "bottom",
+        height: "height",
       },
       width: {
         "device-width": "360px",

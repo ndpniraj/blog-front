@@ -21,7 +21,7 @@ export default function MarkdownHint() {
   return (
     <div
       ref={container}
-      className="transition opacity-0 w-72 mt-5 px-2 py-4 bg-white border rounded-md transform -translate-y-5 justify-self-end"
+      className="transition opacity-0 w-full mt-5 px-2 py-4 bg-white border rounded-md transform -translate-y-5 justify-self-end"
     >
       <h1 className="text-gray-700 text-xl font-semibold">
         General markdown rules

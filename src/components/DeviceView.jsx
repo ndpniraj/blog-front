@@ -18,7 +18,7 @@ export default function DeviceView({
     <div
       id="container"
       onClick={handleClose}
-      className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center"
+      className="fixed inset-0 bg-gray-500 bg-opacity-50 backdrop-blur-sm flex items-center justify-center"
     >
       <div className="w-device-width h-device-height bg-white rounded overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
         <img src={thumbnail} alt="" />
