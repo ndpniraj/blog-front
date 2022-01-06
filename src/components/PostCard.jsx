@@ -9,7 +9,7 @@ export default function PostCard({ post, onDeleteClick }) {
 
   return (
     <Link to={`/blog/${slug}`}>
-      <div className="md:mb-0 mb-5 flex flex-col rounded overflow-hidden shadow-md">
+      <div className="md:mb-0 mb-5 flex flex-col rounded overflow-hidden shadow-md bg-white">
         <img
           className="aspect-video"
           src={thumbnail || "./blank.jpg"}

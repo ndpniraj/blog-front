@@ -13,7 +13,7 @@ export default function ImageUploadButton({ busy, onChange }) {
       />
       <label
         htmlFor="image-input"
-        className="flex justify-between items-center border border-primary text-primary hover:bg-hilight hover:ring-1 ring-blue-500 transition p-2 cursor-pointer rounded"
+        className="flex justify-between items-center border border-gray-400 border-primary text-primary hover:bg-hilight hover:ring-1 ring-blue-500 transition p-2 cursor-pointer rounded"
       >
         Place Image
         {busy ? (

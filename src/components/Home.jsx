@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import { deletePost, getPosts, searchPost } from "../api/post";
+import { deletePost, getPosts } from "../api/post";
 import { useNotification } from "../context/NotificationProvider";
+import { useSearch } from "../context/SearchProvider";
 
 import PostCard from "./PostCard";
 
@@ -84,9 +84,8 @@ const getPaginationCount = (length) => {
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
-  const [query, setQuery] = useState("");
   const [totalPostCount, setTotlaPostCount] = useState(0);
-  const [searchResults, setSearchResults] = useState([]);
+  const { searchResults } = useSearch();
 
   const { updateNotification } = useNotification();
 
@@ -94,7 +93,7 @@ export default function Home() {
   const paginations = new Array(paginationCount).fill(" ");
 
   const fetchPosts = async () => {
-    const { error, posts, postCount } = await getPosts(pageNo);
+    const { error, posts, postCount } = await getPosts(pageNo, 9);
     if (error) return updateNotification("error", error);
     setPosts(posts);
     setTotlaPostCount(postCount);
@@ -116,30 +115,9 @@ export default function Home() {
     setPosts(posts.filter((p) => p.id !== id));
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!query.trim()) return;
-
-    const { error, posts } = await searchPost(query);
-    if (error) return updateNotification("error", error);
-
-    setSearchResults(posts);
-  };
-
-  const resetSearch = () => {
-    setQuery("");
-    setSearchResults([]);
-  };
-
   const fetchMorePost = (index) => {
     pageNo = index;
     fetchPosts();
-  };
-
-  const handleKeyDown = ({ key }) => {
-    if (key === "Escape") {
-      resetSearch();
-    }
   };
 
   if (!posts.length)
@@ -151,28 +129,6 @@ export default function Home() {
 
   return (
     <div className="p-2 max-w-screen-lg mx-auto">
-      <form
-        onKeyDown={handleKeyDown}
-        onSubmit={handleSearch}
-        className="relative"
-      >
-        <input
-          value={query}
-          onChange={({ target }) => setQuery(target.value)}
-          type="text"
-          className="w-full p-2 border my-5 rounded border-gray-400 focus:ring-1 ring-blue-500 outline-none text-xl"
-          placeholder="Search..."
-        />
-        {searchResults.length ? (
-          <button
-            onClick={resetSearch}
-            type="button"
-            className="absolute right-3 text-gray-700 top-1/2 -translate-y-1/2"
-          >
-            <AiOutlineClose size={20} />
-          </button>
-        ) : null}
-      </form>
       <div className="pb-20 transition-height">
         <div className="md:grid grid-cols-2 lg:grid-cols-3 gap-3">
           {searchResults.length
